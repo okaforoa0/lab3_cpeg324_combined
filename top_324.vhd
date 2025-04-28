@@ -113,15 +113,17 @@ component print_module
 end component;
 
 --internal signals 
-signal inst_int: std_logic_vector(7 downto 0) := instruction;
+signal inst_int, address_int: std_logic_vector(7 downto 0);
 signal rs_int, rt_int, rd_int, imm_int, muxA_int, muxB_int, alu_res_int, digit_int: std_logic_vector(15 downto 0);
 signal alu_op_int: std_logic_vector(1 downto 0); 
 signal Amux_cont_int, Bmux_cont_int, print_cont_int, skip_cont_int, write_cont_int: std_logic;
 
 begin
 
+inst_in <= instruction;     
+
 register_file: reg_324 port map(rs => inst_int(5 downto 4), rt => inst_int(3 downto 2), rd => inst_int(1 downto 0), write_data => alu_res_int, write_control => write_cont_int, clk => clk, reset => reset, rs_out => rs_int, rt_out => rt_int, rd_out => rd_int);
-PC_module: pc port map(clk => clk, reset => reset, skip => skip_cont_int, pc_out => inst_int); 
+PC_module: pc port map(clk => clk, reset => reset, skip => skip_cont_int, pc_out => address_int); 
 sign_extend_module: sign_extend4to16 port map(input_4bit => inst_int(5 downto 2), output_16bit => imm_int);
 ALU_module: main_alu port map(A => muxA_int, B => muxB_int, clk => clk, control => alu_op_int, result => alu_res_int); 
 control_module: control_324 port map(op => inst_int(7 downto 6), control => inst_int(3), ALU_result => alu_res_int, clk => clk, ALU_op => alu_op_int, A_mux => Amux_cont_int, B_mux => Bmux_cont_int, print_control => print_cont_int, skip_control => skip_cont_int, write_control => write_cont_int); 
