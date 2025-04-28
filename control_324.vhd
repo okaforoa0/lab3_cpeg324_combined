@@ -49,7 +49,8 @@ architecture Behavioral of control_324 is
 
 begin
 
-gen_signals: process(clk)
+--gen_signals: process(clk)
+    gen_signals: process(op, control, ALU_result)
     begin 
         if(op = "00")then --add
             ALU_op <= "00"; 
