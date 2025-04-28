@@ -90,7 +90,7 @@ begin
                     result <= A(7 downto 0) & A(15 downto 8);
 
                 when "10" => -- FORWARD A
-                    result <= B(15 downto 8) & A(7 downto 0);
+                    result <= A; --B(15 downto 8) & A(7 downto 0);
 
                 when "11" => -- COMPARE lower halves
                     result <= "00000000" & diff_lower;
