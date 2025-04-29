@@ -143,8 +143,7 @@ control_module: control_324 port map(op => inst_int(7 downto 6), control => inst
 
 muxA: mux_324 port map(A => rs_int, B => imm_int, sel => Amux_cont_int, output => muxA_int);
 muxB: mux_324 port map(A => rt_int, B => rd_int, sel => Bmux_cont_int, output => muxB_int); 
---changed data_int => from rs_int to rd_int
-print: print_module port map(data_in => rd_int, print_enable => print_cont_int, digits_out => digit_int); 
+print: print_module port map(data_in => rs_int, print_enable => print_cont_int, digits_out => digit_int); 
 
 output3 <= digit_int(15 downto 12); 
 output2 <= digit_int(11 downto 8);
