@@ -67,14 +67,16 @@ begin
         wait for clk_period;
 
         -- Load 2 into R2
-        --instr_tb <= "01100010";  -- corrected version from original tb
         instr_tb <= "01001010";
         wait for clk_period;
         instr_tb <= "00000000"; -- NOP for stabilization
         wait for clk_period;
 
         -- Load -1 into R3
-        instr_tb <= "01111111";
+        --instr_tb <= "01111111";
+
+        --load 2 into r3
+        instr_tb <= "01001010";
         wait for clk_period;
         instr_tb <= "00000000"; -- NOP for stabilization
         wait for clk_period;
@@ -91,8 +93,7 @@ begin
         instr_tb <= "10011000";
         wait for clk_period;
 
-        -- Load 4 into r1 (might be skipped)
-        --instr_tb <= "01010100";
+        -- Load 4 into r1 (skipped if r1 < r2)
         instr_tb <= "01010001";
         wait for clk_period;
 
